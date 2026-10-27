@@ -1,0 +1,61 @@
+{
+  "name": "atlas-vscode",
+  "displayName": "Atlas",
+  "description": "Scaffold an Atlas app, see your instance and keys, run the Atlas CLI and add the Atlas MCP server from VS Code.",
+  "version": "0.1.0",
+  "publisher": "atlasauth",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      { "command": "atlas.scaffoldApp", "title": "Atlas: Create an app" },
+      { "command": "atlas.showStatus", "title": "Atlas: Show instance and platform status" },
+      { "command": "atlas.listKeys", "title": "Atlas: List instance keys" },
+      { "command": "atlas.runCli", "title": "Atlas: Run a CLI command" },
+      { "command": "atlas.preflight", "title": "Atlas: Check this app's setup (preflight)" },
+      { "command": "atlas.installMcp", "title": "Atlas: Add the Atlas MCP server to this workspace" },
+      { "command": "atlas.refreshStatusBar", "title": "Atlas: Refresh status bar" }
+    ],
+    "configuration": {
+      "title": "Atlas",
+      "properties": {
+        "atlas.cliPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the `atlas` CLI. Leave empty to run it with `npx @atlasauth/cli`."
+        },
+        "atlas.statusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the signed-in Atlas profile and instance in the status bar."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsgo -p tsconfig.json --noEmit --module preserve --moduleResolution bundler --incremental --tsBuildInfoFile node_modules/.cache/typecheck.tsbuildinfo",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  },
+  "files": [
+    "dist",
+    "!dist/*.tsbuildinfo",
+    "README.md",
+    "CHANGELOG.md"
+  ]
+}
